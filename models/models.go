@@ -6,7 +6,7 @@ import (
 	"log"
 )
 import "github.com/jinzhu/gorm"
-
+import _ "github.com/jinzhu/gorm/dialects/mysql"
 var db *gorm.DB
 
 type Model struct {
@@ -44,7 +44,7 @@ func init() {
 	}
 
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
-		return tablePrefix+defaultTableName
+		return tablePrefix + defaultTableName
 	}
 
 	db.SingularTable(true)
@@ -52,6 +52,6 @@ func init() {
 	db.DB().SetMaxOpenConns(100)
 }
 
-func CloseDB()  {
+func CloseDB() {
 	defer db.Close()
 }
